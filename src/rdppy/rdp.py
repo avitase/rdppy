@@ -13,11 +13,7 @@ def dist2(points, start, end):
     return max([max_p1, max_p2, 0]) ** 2 + np.cross(points - start, d) ** 2
 
 
-def lossy_compress(points, threshold):
-    points = np.array(points)
-    if len(points.shape) != 2 or points.shape[-1] not in (2, 3):
-        raise ValueError("Points have to be a sequence of 2D or 3D tuple.")
-
+def _lossy_compress(points, threshold):
     start = points[0]
     end = points[-1]
 
@@ -26,10 +22,18 @@ def lossy_compress(points, threshold):
     return (
         np.vstack(
             (
-                lossy_compress(points[: i + 1], threshold)[:-1],
-                lossy_compress(points[i:], threshold),
+                _lossy_compress(points[: i + 1], threshold)[:-1],
+                _lossy_compress(points[i:], threshold),
             )
         )
         if d[i] > threshold ** 2
         else np.array([start, end])
     )
+
+
+def lossy_compress(points, threshold):
+    points = np.array(points)
+    if len(points.shape) != 2 or points.shape[-1] not in (2, 3):
+        raise ValueError("Points have to be a sequence of 2D or 3D tuple.")
+
+    return _lossy_compress(points, threshold)
