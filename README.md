@@ -4,7 +4,7 @@
 [![PyPI](https://img.shields.io/pypi/v/rdppy)](https://pypi.org/project/rdppy/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-Implementation of the Ramer-Douglas-Peucker algorithm for 2D polylines using a point-to-line-segment distance measure.
+Implementation of the Ramer-Douglas-Peucker algorithm for polylines using a point-to-line-segment distance measure.
 
 ## Usage
 The API consists of a single function `rdppy.filter(points, threshold)` which returns a binary mask upon calling with a sequence of points and a threshold (aka the _epsilon_ value):
@@ -50,7 +50,7 @@ Note that this allows the filtering of more complex sequences which carry, for i
 >>> points[mask, -1]
 array(['a', 'b', 'c', 'i', 'j'], dtype='<U21')
 ```
-Users may define custom metrics to measure the distance between a list of points, `points`, and a segment parametrized via its start, `seg_start`, and end `seg_end`. For instance `my_dist2` measures the distances of 2D points to the (infinite) line rather than the finite segment:
+**The default metric only works for 2D points** but users may define custom metrics to measure the distance between a list of points, `points`, of any dimension and a segment parametrized via its start, `seg_start`, and end `seg_end`. For instance `my_dist2` measures the distances of 2D points to the (infinite) line rather than the finite segment:
 ```python
 >>> def my_dist2(points, seg_start, seg_end):
 ...    d = np.divide(seg_end - seg_start, np.sqrt(np.sum((seg_end - seg_start) ** 2)))
