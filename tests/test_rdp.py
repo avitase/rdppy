@@ -1,17 +1,37 @@
 import numpy as np
 import pytest
-from src.rdppy import lossy_compress as rdp
+from src.rdppy import filter as rdp
 
 test_cases = [
     {
+        "input": [],
+        "threshold": 0.0,
+        "output": [],
+    },
+    {
+        "input": [(0, 0)],
+        "threshold": 10.0,
+        "output": [True],
+    },
+    {
+        "input": [(0, 0), (4, 0)],
+        "threshold": 10.0,
+        "output": [True, True],
+    },
+    {
+        "input": [(0, 0), (4, 0), (3, 1)],
+        "threshold": 10.0,
+        "output": [True, False, True],
+    },
+    {
         "input": [(0, 0), (4, 0), (3, 1)],
         "threshold": 1.4,
-        "output": [(0, 0), (4, 0), (3, 1)],
+        "output": [True, True, True],
     },
     {
         "input": [(0, 0), (4, 0), (3, 1)],
         "threshold": 1.5,
-        "output": [(0, 0), (3, 1)],
+        "output": [True, False, True],
     },
     {
         "input": [
@@ -27,18 +47,7 @@ test_cases = [
             (5, 4),
         ],
         "threshold": 0.3,
-        "output": [
-            (0, 0),
-            (4, 0),
-            (0, 1),
-            (1, 1),
-            (1, 2),
-            (2, 2),
-            (2, 3),
-            (3, 3),
-            (3, 4),
-            (5, 4),
-        ],
+        "output": [True, True, True, True, True, True, True, True, True, True],
     },
     {
         "input": [
@@ -54,7 +63,7 @@ test_cases = [
             (5, 4),
         ],
         "threshold": 0.9,
-        "output": [(0, 0), (4, 0), (0, 1), (3, 4), (5, 4)],
+        "output": [True, True, True, False, False, False, False, False, True, True],
     },
     {
         "input": [
@@ -70,7 +79,7 @@ test_cases = [
             (5, 4),
         ],
         "threshold": 1.1,
-        "output": [(0, 0), (4, 0), (0, 1), (5, 4)],
+        "output": [True, True, True, False, False, False, False, False, False, True],
     },
 ]
 

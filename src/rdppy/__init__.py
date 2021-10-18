@@ -1,1 +1,1 @@
-from .rdp import lossy_compress
+from .rdp import filter
