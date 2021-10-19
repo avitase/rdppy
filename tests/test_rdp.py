@@ -81,6 +81,16 @@ test_cases = [
         "threshold": 1.1,
         "output": [True, True, True, False, False, False, False, False, False, True],
     },
+    {
+        "input": [(0, 0), (1, 0), (0, 0)],
+        "threshold": 0.5,
+        "output": [True, True, True],
+    },
+    {
+        "input": [(0, 0), (1, 0), (0, 0)],
+        "threshold": 1.5,
+        "output": [True, False, True],
+    },
 ]
 
 

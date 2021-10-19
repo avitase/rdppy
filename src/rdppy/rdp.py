@@ -4,7 +4,7 @@ from typing import Any, Callable, Optional
 
 def dist2(points, start, end):
     if np.allclose(start, end):
-        return np.sum((points - start) ** 2)
+        return np.sum((points - start) ** 2, axis=1)
 
     d = np.divide(end - start, np.sqrt(np.sum((end - start) ** 2)))
 
