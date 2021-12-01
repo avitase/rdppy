@@ -62,3 +62,11 @@ The maximum of the returned values is compared with the squared threshold value.
 ```python
 rdppy.filter(points, threshold, dist2_fun=rdppy.rdp.dist2)
 ```
+
+## Installation
+`RDPpy` releases are available as wheel packages for macOS, Windows and Linux on [PyPI](https://pypi.org/project/rdppy/).
+Install it using pip:
+```
+python -m pip install -U pip
+python -m pip install -U rdppy
+```
